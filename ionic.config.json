@@ -1,0 +1,7 @@
+{
+  "name": "Ubisson-Pharmacy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
