@@ -1,0 +1,20 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>page-prescription-scan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" [style.visibility]="content_visibility">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">page-prescription-scan</ion-title>
+      
+    </ion-toolbar>
+  </ion-header>
+  <ion-button
+    expand="block"
+    class="ion-margin"
+    (click)="startScan()">
+      Start Scan
+    </ion-button>
+</ion-content>

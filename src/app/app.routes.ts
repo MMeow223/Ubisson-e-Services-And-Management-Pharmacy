@@ -9,5 +9,9 @@ export const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
+  },  {
+    path: 'page-prescription-scan',
+    loadComponent: () => import('./page-prescription-scan/page-prescription-scan.page').then( m => m.PagePrescriptionScanPage)
   },
+
 ];
