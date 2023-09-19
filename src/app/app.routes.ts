@@ -13,5 +13,9 @@ export const routes: Routes = [
     path: 'page-prescription-scan',
     loadComponent: () => import('./page-prescription-scan/page-prescription-scan.page').then( m => m.PagePrescriptionScanPage)
   },
+  {
+    path: 'page-prescription-details',
+    loadComponent: () => import('./page-prescription-details/page-prescription-details.page').then( m => m.PagePrescriptionDetailsPage)
+  },
 
 ];

@@ -26,6 +26,10 @@
 @import "@ionic/angular/css/flex-utils.css";
 
 body.scanner-active {
-    --background: transparent;
-    --ion-background-color: transparent;
-  }
+  --background: transparent;
+  --ion-background-color: transparent;
+}
+
+[hidden] {
+  display: none !important;
+}

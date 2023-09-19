@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 
 @Component({
@@ -13,10 +13,10 @@ import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 })
 export class PagePrescriptionScanPage implements OnDestroy {
 
-  content_visibility: string;
+  scanActive: boolean;
 
-  constructor() {
-    this.content_visibility = 'show';
+  constructor(public navCtrl: NavController) {
+    this.scanActive = false;
   }
 
   startScan = async () => {
@@ -27,7 +27,7 @@ export class PagePrescriptionScanPage implements OnDestroy {
     // make background of WebView transparent
     // note: if you are using ionic this might not be enough, check below
     document.querySelector('body')!.classList.add('scanner-active');
-    this.content_visibility = 'hidden';
+    this.scanActive = true;
     BarcodeScanner.hideBackground();
   
     const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
@@ -35,6 +35,9 @@ export class PagePrescriptionScanPage implements OnDestroy {
     // if the result has content
     if (result.hasContent) {
       console.log(result.content); // log the raw scanned content
+      this.navCtrl.navigateForward(`/page-prescription-details`, {
+         state: { item: result.content }
+      });
     }
     
   };
@@ -42,7 +45,7 @@ export class PagePrescriptionScanPage implements OnDestroy {
   stopScan = () => {
     BarcodeScanner.showBackground();
     document.querySelector('body')!.classList.remove('scanner-active');
-    this.content_visibility = 'show';
+    this.scanActive = false;
     BarcodeScanner.stopScan();
   };
 
