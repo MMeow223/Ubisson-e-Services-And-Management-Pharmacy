@@ -34,10 +34,14 @@ export class PagePrescriptionScanPage implements OnDestroy {
 
     // if the result has content
     if (result.hasContent) {
-      console.log(result.content); // log the raw scanned content
-      this.navCtrl.navigateForward(`/page-prescription-details`, {
-         state: { item: result.content }
-      });
+      if (result.content.startsWith('$Biotective$')) {
+        this.navCtrl.navigateForward(`/page-prescription-details`, {
+            state: { item: result.content }
+        });
+      } else {
+        alert("Invalid QR code");
+        this.stopScan();
+      }
     }
     
   };

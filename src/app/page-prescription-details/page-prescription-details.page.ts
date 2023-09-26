@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
+import { authorisedFetch, loginHelper } from '../helper/apiHelper';
 
 @Component({
   selector: 'app-page-prescription-details',
@@ -17,14 +18,24 @@ export class PagePrescriptionDetailsPage implements OnInit {
   
   constructor(private route: ActivatedRoute, private router: Router) { 
     this.scanResult = '';
-    this.route.queryParams.subscribe(_p => {
-      const navParams = this.router.getCurrentNavigation()!.extras.state
-      if (navParams) this.scanResult = navParams['item'];
-    })
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await loginHelper("2", "richardreed", "12345678");
 
+    const navParams = history.state.item || "";
+    if (navParams.startsWith("\$Biotective\$")) {
+      let response = await authorisedFetch("v1/pharmacist/prescription", "POST", {
+        "prescription": navParams
+      })
+      console.log(response, response?.data);
+      if (response?.data == null) {
+        alert("Invalid QR code");
+        this.router.navigate(['/page-prescription-scan']);
+      } else {
+        this.scanResult = JSON.stringify(response.data);
+      }
+    }
   }
 
 }
