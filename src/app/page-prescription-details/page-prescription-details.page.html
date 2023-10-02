@@ -12,21 +12,25 @@
   </ion-header>
 
   <app-card-medication
+    (click)="allChecked($event)"
     [title]="'This is title'"
     [description]="'This is title'"
     [image]="'https://www.helpguide.org/wp-content/uploads/2023/02/Anti-Anxiety-Medication-1200x800.jpeg'"
   ></app-card-medication>
   <app-card-medication
+    (click)="allChecked($event)"
     [title]="'This is title'"
     [description]="'This is title'"
     [image]="'https://www.helpguide.org/wp-content/uploads/2023/02/Anti-Anxiety-Medication-1200x800.jpeg'"
   ></app-card-medication>
   <app-card-medication
+    (click)="allChecked($event)"
     [title]="'This is title'"
     [description]="'This is title'"
     [image]="'https://www.helpguide.org/wp-content/uploads/2023/02/Anti-Anxiety-Medication-1200x800.jpeg'"
   ></app-card-medication>
-  <ion-button class="login-button" expand="block">
+
+  <ion-button class="login-button" expand="block" [disabled]="buttonDisabled">
     <ion-icon slot="start" name="camera"></ion-icon>
     Capture Evidence
   </ion-button>

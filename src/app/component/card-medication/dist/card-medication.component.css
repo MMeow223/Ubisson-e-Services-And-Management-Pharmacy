@@ -44,7 +44,12 @@ ion-content p {
   margin: 5px;
 }
 
-ion-icon {
+.check-icon {
   font-size: 2em;
   color: #006600;
+}
+
+.alert-icon {
+  font-size: 2em;
+  color: red;
 }

@@ -11,7 +11,16 @@
     <p><b>Sig: </b>{{ sig }}</p>
     <p><b>Refill: </b>{{ refill }}</p>
   </ion-content>
-  <ion-icon [hidden]="isHidden" name="checkmark-circle-outline"></ion-icon>
+  <ion-icon
+    class="check-icon"
+    [hidden]="isHidden"
+    name="checkmark-circle-outline"
+  ></ion-icon>
+  <ion-icon
+    class="alert-icon"
+    [hidden]="!isHidden"
+    name="alert-circle-outline"
+  ></ion-icon>
   <!-- <p class="pts">{{ point }} pts</p> -->
 </ion-card>
 <!-- </a> -->

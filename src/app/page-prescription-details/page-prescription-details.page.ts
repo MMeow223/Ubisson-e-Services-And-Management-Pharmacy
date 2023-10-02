@@ -18,6 +18,7 @@ import { environment } from 'src/environments/environment';
 export class PagePrescriptionDetailsPage implements OnInit {
   scanResult: string;
   prescription: any;
+  buttonDisabled: boolean = true;
 
   constructor(private route: ActivatedRoute, private router: Router) {
     this.scanResult = '';
@@ -50,6 +51,19 @@ export class PagePrescriptionDetailsPage implements OnInit {
       Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15)
     );
+  }
+
+  allChecked(event: any) {
+    let alertIcon = document.getElementsByClassName('alert-icon');
+    if (alertIcon.length > 0) {
+      alertIcon[0].remove();
+    }
+
+    alertIcon = document.getElementsByClassName('alert-icon');
+
+    if (alertIcon.length == 0) {
+      this.buttonDisabled = false;
+    }
   }
 
   async uploadEvidence(fileChangeEvent: any) {

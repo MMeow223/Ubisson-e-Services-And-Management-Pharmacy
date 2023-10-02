@@ -55,6 +55,7 @@ var PagePrescriptionDetailsPage = /** @class */ (function () {
     function PagePrescriptionDetailsPage(route, router) {
         this.route = route;
         this.router = router;
+        this.buttonDisabled = true;
         this.scanResult = '';
     }
     PagePrescriptionDetailsPage.prototype.ngOnInit = function () {
@@ -89,6 +90,16 @@ var PagePrescriptionDetailsPage = /** @class */ (function () {
     PagePrescriptionDetailsPage.prototype.generateQuickGuid = function () {
         return (Math.random().toString(36).substring(2, 15) +
             Math.random().toString(36).substring(2, 15));
+    };
+    PagePrescriptionDetailsPage.prototype.allChecked = function (event) {
+        var alertIcon = document.getElementsByClassName('alert-icon');
+        if (alertIcon.length > 0) {
+            alertIcon[0].remove();
+        }
+        alertIcon = document.getElementsByClassName('alert-icon');
+        if (alertIcon.length == 0) {
+            this.buttonDisabled = false;
+        }
     };
     PagePrescriptionDetailsPage.prototype.uploadEvidence = function (fileChangeEvent) {
         return __awaiter(this, void 0, void 0, function () {
