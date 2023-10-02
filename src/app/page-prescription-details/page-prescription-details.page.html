@@ -1,16 +1,19 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>page-prescription-details</ion-title>
+    <ion-title>Scan Result</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">page-prescription-details</ion-title>
+      <ion-title size="large">Scan Result</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div>
-    Scan Result: {{ scanResult }}
-  </div>
+  <!-- <div>Scan Result: {{ scanResult }}</div> -->
+  <app-card-medication
+    [title]="'This is title'"
+    [description]="'This is title'"
+    [image]="'https://www.helpguide.org/wp-content/uploads/2023/02/Anti-Anxiety-Medication-1200x800.jpeg'"
+  ></app-card-medication>
 </ion-content>

@@ -9,41 +9,43 @@ import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
   templateUrl: './page-prescription-scan.page.html',
   styleUrls: ['./page-prescription-scan.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule],
 })
 export class PagePrescriptionScanPage implements OnDestroy {
-
   scanActive: boolean;
 
   constructor(public navCtrl: NavController) {
     this.scanActive = false;
   }
 
+  // ngOnInit() {
+  //   this.startScan();
+  // }
+
   startScan = async () => {
     // Check camera permission
     // This is just a simple example, check out the better checks below
     await BarcodeScanner.checkPermission({ force: true });
-  
+
     // make background of WebView transparent
     // note: if you are using ionic this might not be enough, check below
     document.querySelector('body')!.classList.add('scanner-active');
     this.scanActive = true;
     BarcodeScanner.hideBackground();
-  
+
     const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
 
     // if the result has content
     if (result.hasContent) {
       if (result.content.startsWith('$Biotective$')) {
         this.navCtrl.navigateForward(`/page-prescription-details`, {
-            state: { item: result.content }
+          state: { item: result.content },
         });
       } else {
-        alert("Invalid QR code");
+        alert('Invalid QR code');
         this.stopScan();
       }
     }
-    
   };
 
   stopScan = () => {

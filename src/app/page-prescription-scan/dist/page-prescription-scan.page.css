@@ -12,11 +12,7 @@
 }
 
 .btn-start-scan {
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
   border: 2px solid white;
-  // background-color: #641010;
   content: "";
   display: block;
   left: 50%;
