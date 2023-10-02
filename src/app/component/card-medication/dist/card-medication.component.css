@@ -1,0 +1,45 @@
+a {
+  text-decoration: none;
+}
+
+ion-card {
+  height: 170px;
+  padding: 10px;
+  display: flex;
+}
+
+ion-card-title,
+ion-card-subtitle {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.img-left {
+  width: 125px;
+  height: 100%;
+  margin-top: auto;
+  margin-bottom: auto;
+  border-radius: 5px;
+  margin-right: 16px;
+}
+
+.pts {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  margin: 0;
+  font-weight: 600;
+}
+
+ion-content {
+  font-size: 20px;
+  text-wrap: nowrap;
+}
+
+ion-content p {
+  margin: 5px;
+}

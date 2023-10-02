@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CapacitorHttp } from '@capacitor/core';
 import { authorisedFetch, loginHelper } from '../helper/apiHelper';
+import { CardMedicationComponent } from '../component/card-medication/card-medication.component';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,10 +13,9 @@ import { environment } from 'src/environments/environment';
   templateUrl: './page-prescription-details.page.html',
   styleUrls: ['./page-prescription-details.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  imports: [IonicModule, CommonModule, FormsModule, CardMedicationComponent],
 })
 export class PagePrescriptionDetailsPage implements OnInit {
-  
   scanResult: string;
   prescription: any;
 
@@ -24,13 +24,17 @@ export class PagePrescriptionDetailsPage implements OnInit {
   }
 
   async ngOnInit() {
-    await loginHelper("2", "richardreed", "12345678");
+    await loginHelper('2', 'richardreed', '12345678');
 
-    const navParams = history.state.item || "";
-    if (navParams.startsWith("\$Biotective\$")) {
-      let response = await authorisedFetch("v1/pharmacist/prescription", "POST", {
-        "prescription": navParams
-      })
+    const navParams = history.state.item || '';
+    if (navParams.startsWith('$Biotective$')) {
+      let response = await authorisedFetch(
+        'v1/pharmacist/prescription',
+        'POST',
+        {
+          prescription: navParams,
+        }
+      );
       console.log(response, response?.data);
       if (response == null || response?.data == null) {
         alert("Invalid QR code");

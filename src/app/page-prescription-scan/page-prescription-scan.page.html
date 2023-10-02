@@ -1,34 +1,47 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>page-prescription-scan</ion-title>
-  </ion-toolbar>
+  <!-- <ion-toolbar>
+    <ion-title>Scanner</ion-title>
+  </ion-toolbar> -->
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">page-prescription-scan</ion-title>
-      
-    </ion-toolbar>
+    <!-- <ion-toolbar>
+      <ion-title size="large">Scanner</ion-title>
+    </ion-toolbar> -->
   </ion-header>
 
   <div class="scanArea" [hidden]="!scanActive"></div>
 
-  <ion-button
+  <div class="btn-start-scan" (click)="startScan()" [hidden]="scanActive">
+    <p class="btn-text">Click to Scan</p>
+  </div>
+
+  <!-- <ion-button
+    class="btn-start-scan"
     expand="block"
     class="ion-margin"
     (click)="startScan()"
     [hidden]="scanActive"
-    [disabled]="scanActive">
-      Start Scan
-    </ion-button>
+    [disabled]="scanActive"
+  >
+    Start Scan
+  </ion-button> -->
 
-    <ion-button
+  <!-- <ion-button
     expand="block"
     class="ion-margin"
     (click)="stopScan()"
     [hidden]="!scanActive"
-    [disabled]="!scanActive">
-      Stop Scan
-    </ion-button>
+    [disabled]="!scanActive"
+  >
+    Stop Scan
+  </ion-button> -->
+
+  <ion-icon
+    class="btn-close"
+    name="close-circle-outline"
+    (click)="stopScan()"
+    [hidden]="!scanActive"
+  ></ion-icon>
 </ion-content>
