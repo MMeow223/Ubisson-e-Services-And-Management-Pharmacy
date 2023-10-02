@@ -35,7 +35,8 @@ export const loginHelper = async (organizationId: string, username: string, pass
             url: `${environment.apiDomain}/v1/pharmacist/login`,
             headers: {
                 'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             data: {
                 organizationId: organizationId,
@@ -63,7 +64,8 @@ export const forgotPasswordHelper = async (email: string) => {
             url: `${environment.apiDomain}/v1/pharmacist/forgot`,
             headers: {
                 'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             data: {
                 email: email
@@ -86,7 +88,8 @@ export const fetchWithCSRF = async (path: string, method: "GET" | "POST" | "PUT"
             url: `${environment.apiDomain}/${path}`,
             headers: {
                 'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             data: data,
             webFetchExtra: { credentials: 'include' }
@@ -115,6 +118,7 @@ export const authorisedFetch = async (path: string, method: "GET" | "POST" | "PU
             headers: {
                 'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             webFetchExtra: { credentials: 'include' }
