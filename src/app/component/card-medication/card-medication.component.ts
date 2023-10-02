@@ -20,12 +20,17 @@ export class CardMedicationComponent implements OnInit {
   @Input() disp: any;
   @Input() sig: any;
   @Input() refill: any;
+  @Input() isHidden: boolean = true;
 
   constructor() {}
 
   ngOnInit() {
-    this.medication_name = 'Medication Name 12344556 555';
+    this.medication_name = 'Paracetamol';
     this.disp = 'Dispense';
     this.sig = 'Sig';
+  }
+
+  markAsDone(event: any) {
+    this.isHidden = !this.isHidden;
   }
 }

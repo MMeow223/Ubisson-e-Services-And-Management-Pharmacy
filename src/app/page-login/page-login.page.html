@@ -1,55 +1,76 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>page-login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header [translucent]="true"> </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">page-login</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <div class="container"  *ngIf="screen == 'signin'">
-    <h1 class="heading">👋 Welcome<br><br></h1>
-    <p class="para">Sign in to continue!</p>
+  <ion-header collapse="condense"> </ion-header>
+
+  <div class="container" *ngIf="screen === 'signin'">
+    <h1 class="heading">👋 Welcome<br /><br /></h1>
+    <p class="para">Sign In</p>
     <form [formGroup]="loginFormData">
-      <ion-item lines="none" class="ion-item">
-        <fieldset  class="input-item">
-          <legend>Organisation ID</legend> 
-          <ion-input formControlName="organizationId" type="number" placeholder="1"></ion-input>
-        </fieldset>
-      </ion-item>
-      <ion-item lines="none" class="ion-item">
-        <fieldset  class="input-item">
-          <legend>Username/Email</legend> 
-          <ion-input formControlName="username" type="username" placeholder="name@domain.com"></ion-input>
-        </fieldset>
-      </ion-item>
-      <ion-item lines="none" class="ion-item">
-        <fieldset class="input-item">
-          <legend>Password</legend> 
-          <ion-input formControlName="password" type="password" placeholder="*******"></ion-input>
-        </fieldset>
-      </ion-item>
-      <p class="forget-text"><a (click)="change('forget')">Forgot Password?</a></p>
-      <ion-button class="login-button" (click)="login()" expand="block">Login</ion-button>
+      <div class="ion-item">
+        <p class="input-label">Organization ID</p>
+        <ion-input
+          formControlName="organizationId"
+          type="number"
+          label-placement="floating"
+          fill="outline"
+          placeholder="1"
+        ></ion-input>
+      </div>
+      <div class="ion-item">
+        <p class="input-label">Username/Email</p>
+        <ion-input
+          formControlName="username"
+          type="username"
+          label-placement="floating"
+          fill="outline"
+          placeholder="name@domain.com"
+        ></ion-input>
+      </div>
+      <div class="ion-item">
+        <p class="input-label">Password</p>
+        <ion-input
+          formControlName="password"
+          type="password"
+          label-placement="floating"
+          fill="outline"
+          placeholder="*********"
+        ></ion-input>
+      </div>
+      <p class="forget-text">
+        <a (click)="change('forget')">Forgot Password?</a>
+      </p>
+      <ion-button class="login-button" (click)="login()" expand="block"
+        >Login</ion-button
+      >
     </form>
   </div>
 
-  <div class="container"  *ngIf="screen == 'forget'">
-    <h1 class="heading">Forget Password?<br><br></h1>
-    <p class="para">Enter email to reset</p>
+  <div class="container" *ngIf="screen === 'forget'">
+    <!-- <h1 class="heading">Forget Password?<br /><br /></h1> -->
+    <p class="para">🔒 Enter Email to Reset Password</p>
     <form [formGroup]="forgetFormData">
-      <ion-item lines="none" class="ion-item">
-        <fieldset  class="input-item">
-          <legend>Email</legend> 
+      <div class="ion-item">
+        <ion-input
+          formControlName="email"
+          type="email"
+          label-placement="floating"
+          fill="outline"
+          placeholder="name@domain.com"
+        ></ion-input>
+      </div>
+      <!-- <ion-item lines="none" class="ion-item">
+        <fieldset class="input-item">
+          <legend>Email</legend>
           <ion-input type="email" placeholder="name@domain.com"></ion-input>
         </fieldset>
-      </ion-item>
+      </ion-item> -->
     </form>
-    <p class="signup-text">Remembered Password&nbsp;<a (click)="change('signin')">Sign In?</a></p>
-    <ion-button class="login-button" (click)="forget()" expand="block">Reset Password</ion-button>
+    <p class="signup-text">
+      Back to&nbsp;<a (click)="change('signin')">Sign In</a>
+    </p>
+    <ion-button class="login-button" (click)="forget()" expand="block"
+      >Reset Password</ion-button
+    >
   </div>
 </ion-content>

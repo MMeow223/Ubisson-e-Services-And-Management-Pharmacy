@@ -9,7 +9,8 @@ export const routes: Routes = [
   },
   {
     path: 'page-login',
-    loadComponent: () => import('./page-login/page-login.page').then( m => m.PageLoginPage)
+    loadComponent: () =>
+      import('./page-login/page-login.page').then((m) => m.PageLoginPage),
   },
   {
     path: 'home',
@@ -18,12 +19,18 @@ export const routes: Routes = [
   },
   {
     path: 'page-prescription-scan',
-    loadComponent: () => import('./page-prescription-scan/page-prescription-scan.page').then( m => m.PagePrescriptionScanPage),
+    loadComponent: () =>
+      import('./page-prescription-scan/page-prescription-scan.page').then(
+        (m) => m.PagePrescriptionScanPage
+      ),
     canActivate: [AuthGuard],
   },
   {
     path: 'page-prescription-details',
-    loadComponent: () => import('./page-prescription-details/page-prescription-details.page').then( m => m.PagePrescriptionDetailsPage),
-    canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./page-prescription-details/page-prescription-details.page').then(
+        (m) => m.PagePrescriptionDetailsPage
+      ),
+    // canActivate: [AuthGuard],
   },
 ];

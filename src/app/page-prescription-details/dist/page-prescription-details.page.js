@@ -47,8 +47,10 @@ var core_1 = require("@angular/core");
 var common_1 = require("@angular/common");
 var forms_1 = require("@angular/forms");
 var angular_1 = require("@ionic/angular");
+var core_2 = require("@capacitor/core");
 var apiHelper_1 = require("../helper/apiHelper");
 var card_medication_component_1 = require("../component/card-medication/card-medication.component");
+var environment_1 = require("src/environments/environment");
 var PagePrescriptionDetailsPage = /** @class */ (function () {
     function PagePrescriptionDetailsPage(route, router) {
         this.route = route;
@@ -71,7 +73,7 @@ var PagePrescriptionDetailsPage = /** @class */ (function () {
                     case 2:
                         response = _a.sent();
                         console.log(response, response === null || response === void 0 ? void 0 : response.data);
-                        if ((response === null || response === void 0 ? void 0 : response.data) == null) {
+                        if (response == null || (response === null || response === void 0 ? void 0 : response.data) == null) {
                             alert('Invalid QR code');
                             this.router.navigate(['/page-prescription-scan']);
                         }
@@ -80,6 +82,54 @@ var PagePrescriptionDetailsPage = /** @class */ (function () {
                         }
                         _a.label = 3;
                     case 3: return [2 /*return*/];
+                }
+            });
+        });
+    };
+    PagePrescriptionDetailsPage.prototype.generateQuickGuid = function () {
+        return (Math.random().toString(36).substring(2, 15) +
+            Math.random().toString(36).substring(2, 15));
+    };
+    PagePrescriptionDetailsPage.prototype.uploadEvidence = function (fileChangeEvent) {
+        return __awaiter(this, void 0, void 0, function () {
+            var photo, atResponse, access_token, headers, selfLink, response, error_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        photo = fileChangeEvent.target.files[0];
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 5, , 6]);
+                        return [4 /*yield*/, apiHelper_1.authorisedFetch('firebase/token', 'GET')];
+                    case 2:
+                        atResponse = _a.sent();
+                        access_token = atResponse === null || atResponse === void 0 ? void 0 : atResponse.data.access_token;
+                        headers = {
+                            'Content-Type': photo.type,
+                            Authorization: "Bearer " + access_token,
+                            'X-Goog-Upload-Header-Content-Type': photo.type,
+                            'X-Goog-Upload-Header-Content-Length': photo.size
+                        };
+                        return [4 /*yield*/, core_2.CapacitorHttp.request({
+                                method: 'POST',
+                                url: "https://storage.googleapis.com/upload/storage/v1/b/" + environment_1.environment.firebaseProject + "/o?uploadType=media&name=prescription/" + this.generateQuickGuid() + "_" + photo.name,
+                                headers: headers,
+                                data: photo
+                            })];
+                    case 3:
+                        selfLink = (_a.sent()).data.selfLink;
+                        return [4 /*yield*/, apiHelper_1.authorisedFetch('v1/pharmacist/prescription/evidence', 'POST', {
+                                id: this.prescription.id,
+                                medication_id: this.prescription.medication_id,
+                                url: selfLink
+                            })];
+                    case 4:
+                        response = _a.sent();
+                        return [2 /*return*/, selfLink];
+                    case 5:
+                        error_1 = _a.sent();
+                        throw error_1;
+                    case 6: return [2 /*return*/];
                 }
             });
         });

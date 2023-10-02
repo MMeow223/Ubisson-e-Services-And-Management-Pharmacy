@@ -14,11 +14,15 @@ var CardMedicationComponent = /** @class */ (function () {
     function CardMedicationComponent() {
         // @Input() url: any;
         this.checked = false;
+        this.isHidden = true;
     }
     CardMedicationComponent.prototype.ngOnInit = function () {
-        this.medication_name = 'Medication Name 12344556 555';
+        this.medication_name = 'Paracetamol';
         this.disp = 'Dispense';
         this.sig = 'Sig';
+    };
+    CardMedicationComponent.prototype.markAsDone = function (event) {
+        this.isHidden = !this.isHidden;
     };
     __decorate([
         core_1.Input()
@@ -44,6 +48,9 @@ var CardMedicationComponent = /** @class */ (function () {
     __decorate([
         core_1.Input()
     ], CardMedicationComponent.prototype, "refill");
+    __decorate([
+        core_1.Input()
+    ], CardMedicationComponent.prototype, "isHidden");
     CardMedicationComponent = __decorate([
         core_1.Component({
             selector: 'app-card-medication',

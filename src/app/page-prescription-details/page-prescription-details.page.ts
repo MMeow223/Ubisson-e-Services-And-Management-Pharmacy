@@ -19,7 +19,7 @@ export class PagePrescriptionDetailsPage implements OnInit {
   scanResult: string;
   prescription: any;
 
-  constructor(private route: ActivatedRoute, private router: Router) { 
+  constructor(private route: ActivatedRoute, private router: Router) {
     this.scanResult = '';
   }
 
@@ -37,7 +37,7 @@ export class PagePrescriptionDetailsPage implements OnInit {
       );
       console.log(response, response?.data);
       if (response == null || response?.data == null) {
-        alert("Invalid QR code");
+        alert('Invalid QR code');
         this.router.navigate(['/page-prescription-scan']);
       } else {
         this.scanResult = JSON.stringify(response.data);
@@ -46,37 +46,49 @@ export class PagePrescriptionDetailsPage implements OnInit {
   }
 
   generateQuickGuid() {
-    return Math.random().toString(36).substring(2, 15) +
-        Math.random().toString(36).substring(2, 15);
+    return (
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15)
+    );
   }
 
   async uploadEvidence(fileChangeEvent: any) {
     const photo = fileChangeEvent.target.files[0];
 
     try {
-      let atResponse = await authorisedFetch("firebase/token", "GET");
+      let atResponse = await authorisedFetch('firebase/token', 'GET');
 
       const access_token = atResponse?.data.access_token;
 
       const headers = {
-        "Content-Type": photo.type,
-        "Authorization": `Bearer ${access_token}`,
-        "X-Goog-Upload-Header-Content-Type": photo.type,
-        "X-Goog-Upload-Header-Content-Length": photo.size,
+        'Content-Type': photo.type,
+        Authorization: `Bearer ${access_token}`,
+        'X-Goog-Upload-Header-Content-Type': photo.type,
+        'X-Goog-Upload-Header-Content-Length': photo.size,
       };
 
-      const { data: { selfLink } } = await CapacitorHttp.request({
-        method: "POST",
-        url: `https://storage.googleapis.com/upload/storage/v1/b/${environment.firebaseProject}/o?uploadType=media&name=prescription/${this.generateQuickGuid()}_${photo.name}`,
+      const {
+        data: { selfLink },
+      } = await CapacitorHttp.request({
+        method: 'POST',
+        url: `https://storage.googleapis.com/upload/storage/v1/b/${
+          environment.firebaseProject
+        }/o?uploadType=media&name=prescription/${this.generateQuickGuid()}_${
+          photo.name
+        }`,
         headers: headers,
         data: photo,
       });
 
-      let response = await authorisedFetch("v1/pharmacist/prescription/evidence", "POST", {
-        id: this.prescription.id,
-        medication_id: this.prescription.medication_id,
-        url: selfLink
-      });
+      let response = await authorisedFetch(
+        'v1/pharmacist/prescription/evidence',
+        'POST',
+        {
+          id: this.prescription.id,
+          medication_id: this.prescription.medication_id,
+          url: selfLink,
+        }
+      );
 
       return selfLink;
     } catch (error) {

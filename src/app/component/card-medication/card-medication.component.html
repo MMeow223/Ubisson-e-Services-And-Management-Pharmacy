@@ -1,7 +1,6 @@
 <!-- <a href="{{ url }}"> -->
-<ion-card>
+<ion-card (click)="markAsDone($event)" [disabled]="!isHidden">
   <img class="img-left" alt="Silhouette of mountains" src="{{ image }}" />
-
   <!-- <ion-card-header>
     <ion-card-title>{{ title }}</ion-card-title>
     <ion-card-subtitle>{{ description }}</ion-card-subtitle>
@@ -12,6 +11,7 @@
     <p><b>Sig: </b>{{ sig }}</p>
     <p><b>Refill: </b>{{ refill }}</p>
   </ion-content>
+  <ion-icon [hidden]="isHidden" name="checkmark-circle-outline"></ion-icon>
   <!-- <p class="pts">{{ point }} pts</p> -->
 </ion-card>
 <!-- </a> -->
