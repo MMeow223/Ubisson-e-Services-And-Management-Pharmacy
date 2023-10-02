@@ -43,7 +43,7 @@ export class PageLoginPage implements OnInit {
       this.isLoading = true
       await loginHelper(this.loginFormData.get('organizationId')?.value, this.loginFormData.get('username')?.value, this.loginFormData.get('password')?.value);
       if (localStorage.getItem("token") != null) {
-        this.navCtrl.navigateForward(`/home`);
+        this.navCtrl.navigateForward(`/page-prescription-scan`);
       } else {
         alert("Invalid credentials");
         this.isLoading = false
