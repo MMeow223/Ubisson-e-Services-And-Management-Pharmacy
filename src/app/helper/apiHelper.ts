@@ -54,6 +54,29 @@ export const loginHelper = async (organizationId: string, username: string, pass
     }
 }
 
+export const forgotPasswordHelper = async (email: string) => {
+    try {
+        await csrfFetch();
+
+        let result = await CapacitorHttp.request({
+            method: 'POST',
+            url: `${environment.apiDomain}/v1/pharmacist/forgot`,
+            headers: {
+                'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+                'Content-Type': 'application/json'
+            },
+            data: {
+                email: email
+            },
+            webFetchExtra: { credentials: 'include' }
+        });
+
+        return result.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export const fetchWithCSRF = async (path: string, method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE", data: object = {}) => {
     try {
         await csrfFetch();
