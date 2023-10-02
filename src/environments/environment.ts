@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiDomain: 'https://ubisson.pythonide.cf/api',
+  apiDomain: 'https://ubisson-john.pythonide.cf/api',
+  firebaseProject: "ubisson-test.appspot.com",
 };
 
 /*

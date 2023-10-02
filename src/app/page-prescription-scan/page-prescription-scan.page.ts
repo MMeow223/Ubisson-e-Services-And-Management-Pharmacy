@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { forgotPasswordHelper } from '../helper/apiHelper';
 
 @Component({
   selector: 'app-page-prescription-scan',

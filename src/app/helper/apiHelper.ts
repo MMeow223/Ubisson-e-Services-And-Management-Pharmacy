@@ -35,7 +35,8 @@ export const loginHelper = async (organizationId: string, username: string, pass
             url: `${environment.apiDomain}/v1/pharmacist/login`,
             headers: {
                 'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             data: {
                 organizationId: organizationId,
@@ -54,6 +55,30 @@ export const loginHelper = async (organizationId: string, username: string, pass
     }
 }
 
+export const forgotPasswordHelper = async (email: string) => {
+    try {
+        await csrfFetch();
+
+        let result = await CapacitorHttp.request({
+            method: 'POST',
+            url: `${environment.apiDomain}/v1/pharmacist/forgot`,
+            headers: {
+                'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            data: {
+                email: email
+            },
+            webFetchExtra: { credentials: 'include' }
+        });
+
+        return result.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export const fetchWithCSRF = async (path: string, method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE", data: object = {}) => {
     try {
         await csrfFetch();
@@ -63,7 +88,8 @@ export const fetchWithCSRF = async (path: string, method: "GET" | "POST" | "PUT"
             url: `${environment.apiDomain}/${path}`,
             headers: {
                 'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             data: data,
             webFetchExtra: { credentials: 'include' }
@@ -92,6 +118,7 @@ export const authorisedFetch = async (path: string, method: "GET" | "POST" | "PU
             headers: {
                 'X-XSRF-TOKEN': getCookie('XSRF-TOKEN'),
                 'Content-Type': 'application/json',
+                'Accept': 'application/json',
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             webFetchExtra: { credentials: 'include' }

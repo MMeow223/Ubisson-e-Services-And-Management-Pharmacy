@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiDomain: 'https://ubisson.pythonide.cf/api',
+  apiDomain: 'https://ubisson-john.pythonide.cf/api',
+  firebaseProject: "ubisson-test.appspot.com",
 };
