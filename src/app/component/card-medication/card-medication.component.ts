@@ -25,7 +25,6 @@ export class CardMedicationComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.medication_name = 'Paracetamol';
     this.disp = 'Dispense';
     this.sig = 'Sig';
   }

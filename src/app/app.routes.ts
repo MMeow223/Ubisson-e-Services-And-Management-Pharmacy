@@ -31,6 +31,6 @@ export const routes: Routes = [
       import('./page-prescription-details/page-prescription-details.page').then(
         (m) => m.PagePrescriptionDetailsPage
       ),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
 ];

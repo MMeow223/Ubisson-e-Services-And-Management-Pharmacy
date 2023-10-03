@@ -37,7 +37,19 @@
   font-size: large;
 }
 
-.btn-close {
+.btn-left {
+  position: absolute;
+  left: 0;
   font-size: 30px;
   margin: 16px;
+  box-shadow: 0 0 10px 0 white;
+  border-radius: 50%;
+}
+.btn-right {
+  position: absolute;
+  right: 0;
+  font-size: 30px;
+  margin: 16px;
+  box-shadow: 0 0 10px 0 white;
+  border-radius: 5px;
 }

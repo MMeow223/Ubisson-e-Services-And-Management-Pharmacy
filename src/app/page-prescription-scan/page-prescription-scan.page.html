@@ -38,10 +38,17 @@
     Stop Scan
   </ion-button> -->
 
-  <ion-icon
-    class="btn-close"
+    <ion-icon
+    class="btn-left"
     name="close-circle-outline"
     (click)="stopScan()"
     [hidden]="!scanActive"
   ></ion-icon>
+  <ion-icon
+    class="btn-right"
+    name="log-out-outline"
+    (click)="logout()"
+    [hidden]="scanActive"
+  ></ion-icon>
+  
 </ion-content>
