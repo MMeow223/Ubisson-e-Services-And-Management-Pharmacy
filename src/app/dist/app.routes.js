@@ -5,7 +5,7 @@ var auth_guard_1 = require("./guards/auth.guard");
 exports.routes = [
     {
         path: '',
-        redirectTo: 'page-prescription-scan',
+        redirectTo: 'home',
         pathMatch: 'full'
     },
     {
@@ -30,6 +30,7 @@ exports.routes = [
         path: 'page-prescription-details',
         loadComponent: function () {
             return Promise.resolve().then(function () { return require('./page-prescription-details/page-prescription-details.page'); }).then(function (m) { return m.PagePrescriptionDetailsPage; });
-        }
+        },
+        canActivate: [auth_guard_1.AuthGuard]
     },
 ];

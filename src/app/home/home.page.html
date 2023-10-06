@@ -1,20 +1,36 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title> BioTective Pharmacy </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">BioTective Pharmacy</ion-title>
     </ion-toolbar>
   </ion-header>
+  <a href="/page-prescription-scan">
+    <div class="btn-start-scan">
+      <p class="btn-text">Click to Scan</p>
+    </div>
+  </a>
+
+  <!-- <img
+    src="assets/icon/qrcodestartscan.png"
+    alt="scan"
+    width="200px"
+    height="auto"
+  /> -->
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <ion-button href="/page-prescription-scan">Go to scan page</ion-button>
+    <strong>Welcome back, {{user}}</strong>
+    <!-- <ion-button href="/page-prescription-scan">Go to scan page</ion-button> -->
   </div>
 </ion-content>

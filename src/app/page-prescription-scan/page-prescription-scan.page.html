@@ -44,4 +44,11 @@
     (click)="stopScan()"
     [hidden]="!scanActive"
   ></ion-icon>
+
+  <ion-icon
+    class="btn-close"
+    name="arrow-back-outline"
+    (click)="back()"
+    [hidden]="scanActive"
+  ></ion-icon>
 </ion-content>

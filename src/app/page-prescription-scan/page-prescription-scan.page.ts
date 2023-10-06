@@ -16,12 +16,12 @@ export class PagePrescriptionScanPage implements OnDestroy {
   scanActive: boolean;
 
   constructor(public navCtrl: NavController) {
-    this.scanActive = false;
+    this.scanActive = true;
   }
 
-  // ngOnInit() {
-  //   this.startScan();
-  // }
+  ngOnInit() {
+    this.startScan();
+  }
 
   startScan = async () => {
     // Check camera permission
@@ -58,5 +58,9 @@ export class PagePrescriptionScanPage implements OnDestroy {
 
   ngOnDestroy(): void {
     this.stopScan();
+  }
+
+  back() {
+    this.navCtrl.navigateBack(`/home`);
   }
 }

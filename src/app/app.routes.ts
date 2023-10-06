@@ -4,7 +4,7 @@ import { AuthGuard } from './guards/auth.guard';
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'page-prescription-scan',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -31,6 +31,6 @@ export const routes: Routes = [
       import('./page-prescription-details/page-prescription-details.page').then(
         (m) => m.PagePrescriptionDetailsPage
       ),
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
 ];
