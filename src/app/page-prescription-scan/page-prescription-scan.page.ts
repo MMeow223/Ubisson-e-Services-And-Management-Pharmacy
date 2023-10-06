@@ -38,6 +38,7 @@ export class PagePrescriptionScanPage implements OnDestroy {
 
     // if the result has content
     if (result.hasContent) {
+      this.stopScan();
       if (result.content.startsWith('$Biotective$')) {
         this.navCtrl.navigateForward(`/page-prescription-details`, {
           state: { item: result.content },
@@ -55,6 +56,12 @@ export class PagePrescriptionScanPage implements OnDestroy {
     this.scanActive = false;
     BarcodeScanner.stopScan();
   };
+
+  logout() {
+      localStorage.removeItem('token');
+      this.navCtrl.navigateForward(`/page-login`);
+  
+  }
 
   ngOnDestroy(): void {
     this.stopScan();
