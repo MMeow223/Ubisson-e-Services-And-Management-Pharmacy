@@ -58,9 +58,8 @@ export class PagePrescriptionScanPage implements OnDestroy {
   };
 
   logout() {
-      localStorage.removeItem('token');
-      this.navCtrl.navigateForward(`/page-login`);
-  
+    localStorage.removeItem('token');
+    this.navCtrl.navigateForward(`/page-login`);
   }
 
   ngOnDestroy(): void {
