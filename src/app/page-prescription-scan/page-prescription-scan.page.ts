@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
-import { forgotPasswordHelper } from '../helper/apiHelper';
 
 @Component({
   selector: 'app-page-prescription-scan',
@@ -15,8 +14,8 @@ import { forgotPasswordHelper } from '../helper/apiHelper';
 export class PagePrescriptionScanPage implements OnDestroy {
   scanActive: boolean;
 
-  constructor(public navCtrl: NavController) {
-    this.scanActive = true;
+  constructor(private navCtrl: NavController) {
+    this.scanActive = false;
   }
 
   ngOnInit() {
@@ -58,8 +57,8 @@ export class PagePrescriptionScanPage implements OnDestroy {
   };
 
   logout() {
-    localStorage.removeItem('token');
-    this.navCtrl.navigateForward(`/page-login`);
+      localStorage.removeItem('token');
+      this.navCtrl.navigateRoot(`/page-login`);
   }
 
   ngOnDestroy(): void {

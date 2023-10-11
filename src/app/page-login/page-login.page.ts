@@ -48,16 +48,12 @@ export class PageLoginPage implements OnInit {
     this.screen = event;
   }
 
-  async login() {
-    if (this.loginFormData.valid) {
-      this.isLoading = true;
-      await loginHelper(
-        this.loginFormData.get('organizationId')?.value,
-        this.loginFormData.get('username')?.value,
-        this.loginFormData.get('password')?.value
-      );
-      if (localStorage.getItem('token') != null) {
-        this.navCtrl.navigateForward(`/home`);
+  async login(){
+    if(this.loginFormData.valid){
+      this.isLoading = true
+      await loginHelper(this.loginFormData.get('organizationId')?.value, this.loginFormData.get('username')?.value, this.loginFormData.get('password')?.value);
+      if (localStorage.getItem("token") != null) {
+        this.navCtrl.navigateRoot(`/page-prescription-scan`);
       } else {
         alert('Invalid credentials');
         this.isLoading = false;
@@ -66,7 +62,7 @@ export class PageLoginPage implements OnInit {
   }
 
   async forget() {
-    if (!this.forgetFormData.valid) {
+    if (this.forgetFormData.valid) {
       this.isLoading = true;
       let response = await forgotPasswordHelper(
         this.forgetFormData.get('email')?.value
