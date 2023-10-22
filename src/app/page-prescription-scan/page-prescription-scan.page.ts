@@ -34,14 +34,21 @@ export class PagePrescriptionScanPage implements OnDestroy {
     BarcodeScanner.hideBackground();
 
     const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
-
+    console.log(result);
     // if the result has content
     if (result.hasContent) {
       this.stopScan();
       if (result.content.startsWith('$Biotective$')) {
-        this.navCtrl.navigateForward(`/page-prescription-details`, {
-          state: { item: result.content },
-        });
+        if (result.content.endsWith('$Reward$')) {
+          this.navCtrl.navigateForward(`/page-reward-details`, {
+            state: { item: result.content },
+          });
+        } else if (result.content.endsWith('$Prescription$')) {
+          console.log('prescription');
+          this.navCtrl.navigateForward(`/page-prescription-details`, {
+            state: { item: result.content },
+          });
+        }
       } else {
         alert('Invalid QR code');
         this.stopScan();
@@ -57,8 +64,8 @@ export class PagePrescriptionScanPage implements OnDestroy {
   };
 
   logout() {
-      localStorage.removeItem('token');
-      this.navCtrl.navigateRoot(`/page-login`);
+    localStorage.removeItem('token');
+    this.navCtrl.navigateRoot(`/page-login`);
   }
 
   ngOnDestroy(): void {

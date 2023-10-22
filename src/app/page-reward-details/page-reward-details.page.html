@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Scan Result</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Scan Result</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <img
+    alt="{{title}}"
+    src="https://firebasestorage.googleapis.com/v0/b/ubisson-test.appspot.com/o/rewards%2F{{image}}?alt=media"
+  />
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{title}}</ion-card-title>
+      <ion-card-subtitle> {{description}} </ion-card-subtitle>
+      <ion-card-title>Term & Condition</ion-card-title>
+      <ion-card-subtitle> {{term_condition}} </ion-card-subtitle>
+    </ion-card-header>
+
+  </ion-card>
+
+</ion-content>

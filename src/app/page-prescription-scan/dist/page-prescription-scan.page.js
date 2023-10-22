@@ -72,12 +72,22 @@ var PagePrescriptionScanPage = /** @class */ (function () {
                         return [4 /*yield*/, barcode_scanner_1.BarcodeScanner.startScan()];
                     case 2:
                         result = _a.sent();
+                        console.log(result);
                         // if the result has content
                         if (result.hasContent) {
+                            this.stopScan();
                             if (result.content.startsWith('$Biotective$')) {
-                                this.navCtrl.navigateForward("/page-prescription-details", {
-                                    state: { item: result.content }
-                                });
+                                if (result.content.endsWith('$Reward$')) {
+                                    this.navCtrl.navigateForward("/page-reward-details", {
+                                        state: { item: result.content }
+                                    });
+                                }
+                                else if (result.content.endsWith('$Prescription$')) {
+                                    console.log('prescription');
+                                    this.navCtrl.navigateForward("/page-prescription-details", {
+                                        state: { item: result.content }
+                                    });
+                                }
                             }
                             else {
                                 alert('Invalid QR code');
@@ -94,10 +104,14 @@ var PagePrescriptionScanPage = /** @class */ (function () {
             _this.scanActive = false;
             barcode_scanner_1.BarcodeScanner.stopScan();
         };
-        this.scanActive = true;
+        this.scanActive = false;
     }
     PagePrescriptionScanPage.prototype.ngOnInit = function () {
         this.startScan();
+    };
+    PagePrescriptionScanPage.prototype.logout = function () {
+        localStorage.removeItem('token');
+        this.navCtrl.navigateRoot("/page-login");
     };
     PagePrescriptionScanPage.prototype.ngOnDestroy = function () {
         this.stopScan();
