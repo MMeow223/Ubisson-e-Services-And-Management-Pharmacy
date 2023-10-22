@@ -18,10 +18,12 @@ import axios from 'axios';
   imports: [IonicModule, CommonModule, FormsModule, CardMedicationComponent],
 })
 export class PagePrescriptionDetailsPage implements OnInit {
-  scanResult: string;
   prescription_id: any;
+  patient_name: any;
+  patient_identity_no: any;
   medications: any;
   loading: any;
+  claimed: boolean = true;
   buttonDisabled: boolean = true;
 
   constructor(
@@ -29,7 +31,6 @@ export class PagePrescriptionDetailsPage implements OnInit {
     private router: Router, 
     private loadingController: LoadingController
   ) {
-    this.scanResult = '';
   }
 
   async ngOnInit() {
@@ -49,13 +50,21 @@ export class PagePrescriptionDetailsPage implements OnInit {
         }
       )
       await this.loading.dismiss();
-      if (response == null || response?.data == null) {
+      if (response?.status != 200) {
+        alert('Invalid QR code');
+        this.router.navigate(['/page-prescription-scan']);
+      }
+      if (response == null || response?.data == null || response?.data?.data == null) {
         alert('Invalid QR code');
         this.router.navigate(['/page-prescription-scan']);
       } else {
-        this.scanResult = JSON.stringify(response.data);
+        this.patient_name = response.data.name;
+        this.patient_identity_no = response.data.identityNo;
         this.medications = response.data.data;
-        this.prescription_id = response.data.data[0].prescription_id;
+        this.prescription_id = response.data.data[0].id;
+        if (response.data.data[0].claimed == 0) {
+          this.claimed = false;
+        }
         console.log(this.medications);
       }
     }
@@ -149,8 +158,6 @@ export class PagePrescriptionDetailsPage implements OnInit {
         'X-Goog-Upload-Header-Content-Type': contentType,
         'X-Goog-Upload-Header-Content-Length': `${file.size}`,
       };
-
-      console.log(file);
       
       const { data: { selfLink } } = await axios.post(
         `https://storage.googleapis.com/upload/storage/v1/b/${environment.firebaseProject}/o?uploadType=media&name=prescription/${fileName}`,
@@ -167,8 +174,12 @@ export class PagePrescriptionDetailsPage implements OnInit {
         }
       );
       await this.loading.dismiss();
-      alert('Evidence uploaded successfully');
-      this.router.navigate(['/page-prescription-scan']);
+      if (response?.status == 200) {
+        alert('Evidence uploaded successfully');
+        this.router.navigate(['/page-prescription-scan']);
+      } else {
+        alert('Failed to upload evidence');
+      }
 
     } catch (error) {
       await this.loading.dismiss();

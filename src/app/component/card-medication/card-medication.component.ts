@@ -11,22 +11,17 @@ import { IonicModule } from '@ionic/angular';
 })
 export class CardMedicationComponent implements OnInit {
   @Input() image: any;
-  @Input() title: any;
-  @Input() description: any;
   // @Input() url: any;
   @Input() checked: boolean = false;
 
   @Input() medication_name: any;
   @Input() disp: any;
   @Input() sig: any;
-  @Input() refill: any;
   @Input() isHidden: boolean = true;
 
   constructor() {}
 
   ngOnInit() {
-    this.disp = 'Dispense';
-    this.sig = 'Sig';
   }
 
   markAsDone(event: any) {

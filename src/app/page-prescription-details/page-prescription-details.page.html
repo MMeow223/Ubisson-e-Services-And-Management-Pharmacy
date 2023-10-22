@@ -10,17 +10,24 @@
       <ion-title size="large">Scan Result</ion-title>
     </ion-toolbar>
   </ion-header>
+  
+  <div class="container">
+    <p *ngIf="prescription_id != undefined"><strong>Prescription ID:</strong> {{ prescription_id }}</p>
+    <p *ngIf="prescription_id != undefined"><strong>Prescription Status:</strong> {{ claimed ? "Claimed": "Unclaimed" }}</p>
+    <p *ngIf="patient_name != undefined"><strong>Patient Name:</strong> {{ patient_name }}</p>
+    <p *ngIf="patient_identity_no != undefined"><strong>Patient Identity No:</strong> {{ patient_identity_no }}</p>
+  </div>
 
   <app-card-medication
     *ngFor="let medication of medications"
     (click)="allChecked($event)"
-    [medication_name]="medication.genericName"
-    [title]="medication.medication_name + ' ' + medication.strength"
-    [description]="'This is title'"
+    [medication_name]="medication.name"
+    [disp]="medication.disp"
+    [sig]="medication.sig"
     [image]="'https://www.helpguide.org/wp-content/uploads/2023/02/Anti-Anxiety-Medication-1200x800.jpeg'"
   ></app-card-medication>
 
-  <ion-button class="login-button" expand="block" (click)="uploadEvidence()" [disabled]="buttonDisabled">
+  <ion-button *ngIf="claimed == false" class="login-button" expand="block" (click)="uploadEvidence()" [disabled]="buttonDisabled">
     <ion-icon slot="start" name="camera"></ion-icon>
     Capture Evidence
   </ion-button>
