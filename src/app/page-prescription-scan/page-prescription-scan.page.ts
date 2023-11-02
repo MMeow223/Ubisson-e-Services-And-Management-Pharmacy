@@ -71,8 +71,4 @@ export class PagePrescriptionScanPage implements OnDestroy {
   ngOnDestroy(): void {
     this.stopScan();
   }
-
-  back() {
-    this.navCtrl.navigateBack(`/home`);
-  }
 }

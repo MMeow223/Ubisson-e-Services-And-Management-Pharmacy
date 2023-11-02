@@ -1,20 +1,20 @@
-<ion-header [translucent]="true">
-  <!-- <ion-toolbar>
-    <ion-title>Scanner</ion-title>
-  </ion-toolbar> -->
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <!-- <ion-toolbar>
-      <ion-title size="large">Scanner</ion-title>
-    </ion-toolbar> -->
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="primary">
+        <ion-button (click)="logout()">
+          <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  
+      <ion-title> BioTective Pharmacy </ion-title>
+    </ion-toolbar>
   </ion-header>
 
   <div class="scanArea" [hidden]="!scanActive"></div>
 
   <div class="btn-start-scan" (click)="startScan()" [hidden]="scanActive">
-    <p class="btn-text">Click to Scan</p>
+    <p class="btn-text">Click to Scan e-Prescription</p>
   </div>
 
   <!-- <ion-button
@@ -43,12 +43,5 @@
     name="close-circle-outline"
     (click)="stopScan()"
     [hidden]="!scanActive"
-  ></ion-icon>
-
-  <ion-icon
-    class="btn-close"
-    name="arrow-back-outline"
-    (click)="back()"
-    [hidden]="scanActive"
   ></ion-icon>
 </ion-content>

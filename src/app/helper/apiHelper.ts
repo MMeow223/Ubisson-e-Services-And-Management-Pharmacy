@@ -53,6 +53,8 @@ export const loginHelper = async (
     // If the login was successful, store the token in local storage
     if (response.status == 200) {
       localStorage.setItem('token', response.data.token);
+    } else if (response.status == 403) {
+      alert('Please verify your email before logging in. An verification email has been sent to your email address.');
     }
   } catch (error) {
     console.error(error);
