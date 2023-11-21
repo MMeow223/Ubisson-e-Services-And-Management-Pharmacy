@@ -34,7 +34,6 @@ export class PagePrescriptionDetailsPage implements OnInit {
   }
 
   async ngOnInit() {
-    await loginHelper("2", "adelinelim", "12345678");
     const navParams = history.state.item || '';
     if (navParams.startsWith('$Biotective$')) {
       this.loading = await this.loadingController.create({
