@@ -3,53 +3,121 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense"> </ion-header>
 
+  <div class="img-container" *ngIf="screen === 'signin'">
+    <img
+      [@rollInPopOut]="trigger"
+      class="center-image"
+      src="../../../assets/icon/UbissonLogo.svg"
+      alt="Ubisson-logo"
+    />
+    <div *ngIf="screen === 'signin'">
+      <p class="welcome-text">Welcome to Biotective</p>
+    </div>
+  </div>
+
+  <div class="img-container" *ngIf="screen === 'forget'">
+    <img
+      class="center-image"
+      src="../../../assets/icon/UbissonLogo.svg"
+      alt="Ubisson-logo"
+    />
+    <div *ngIf="screen === 'forget'">
+      <p class="welcome-text">Forgot your password?</p>
+    </div>
+  </div>
+
+  <!-- Login Section -->
   <div class="container" *ngIf="screen === 'signin'">
-    <h1 class="heading">👋 Welcome<br /><br /></h1>
-    <p class="para">Sign In</p>
+    <!-- Login Form -->
     <form [formGroup]="loginFormData">
-      <div class="ion-item">
-        <p class="input-label">Organization ID</p>
+      <div class="input-container">
         <ion-input
+          class="text-input"
           formControlName="organizationId"
           type="number"
           label-placement="floating"
-          fill="outline"
           placeholder="1"
+          [counter]="true"
+          maxlength="10"
+          label="Organization ID"
         ></ion-input>
       </div>
+        
+      <!-- Username -->
       <div class="ion-item">
-        <p class="input-label">Username/Email</p>
-        <ion-input
-          formControlName="username"
-          type="username"
-          label-placement="floating"
-          fill="outline"
-          placeholder="name@domain.com"
-        ></ion-input>
+        <div class="input-container">
+          <ion-input
+            class="text-input"
+            formControlName="username"
+            labelPlacement="floating"
+            placeholder="name@domain.com"
+            [counter]="true"
+            maxlength="200"
+            label="Username"
+            type="username"
+          ></ion-input>
+        </div>
       </div>
+
+      <!-- Password -->
       <div class="ion-item">
-        <p class="input-label">Password</p>
-        <ion-input
-          formControlName="password"
-          type="password"
-          label-placement="floating"
-          fill="outline"
-          placeholder="*********"
-        ></ion-input>
+        <div class="input-container">
+          <ion-input
+            class="text-input"
+            formControlName="password"
+            labelPlacement="floating"
+            placeholder="*********"
+            [counter]="true"
+            maxlength="200"
+            label="Password"
+            type="password"
+          ></ion-input>
+        </div>
       </div>
-      <p class="forget-text">
-        <a (click)="change('forget')">Forgot Password?</a>
-      </p>
-      <ion-button class="login-button" (click)="login()" expand="block"
-        >Login</ion-button
+
+      <!-- Alert -->
+      <div *ngIf="showAlert">
+        <ion-text color="danger"
+          >Wrong username or password, please try again</ion-text
+        >
+      </div>
+
+      <!-- Login Button -->
+      <ion-button
+        class="login-button"
+        (click)="login()"
+        expand="block"
+        [disabled]="isLoading"
       >
+        Login
+      </ion-button>
+
+      <!-- TEST Button -->
+      <!-- <ion-button class="login-button" (click)="rotate()" expand="block" [disabled]="isLoading">
+        Test
+      </ion-button> -->
+
+      <!-- Register Button and Forget Password Button -->
+      <div class="center-text">
+        <p>
+          <a class="forget-text" (click)="change('forget')"
+            ><b>Forgot Password?</b></a
+          >
+        </p>
+      </div>
     </form>
   </div>
 
+  <!-- Forget Password Section -->
   <div class="container" *ngIf="screen === 'forget'">
-    <!-- <h1 class="heading">Forget Password?<br /><br /></h1> -->
-    <p class="para">🔒 Enter Email to Reset Password</p>
+    <p class="grey-text">
+      Enter your email below and we will send you instructions to recover your
+      password
+    </p>
+
+    <!-- Forget Password Form -->
     <form [formGroup]="forgetFormData">
+      <!-- Email -->
       <div class="ion-item">
         <ion-input
           formControlName="email"
@@ -59,18 +127,36 @@
           placeholder="name@domain.com"
         ></ion-input>
       </div>
-      <!-- <ion-item lines="none" class="ion-item">
-        <fieldset class="input-item">
-          <legend>Email</legend>
-          <ion-input type="email" placeholder="name@domain.com"></ion-input>
-        </fieldset>
-      </ion-item> -->
     </form>
-    <p class="signup-text">
-      Back to&nbsp;<a (click)="change('signin')">Sign In</a>
-    </p>
-    <ion-button class="login-button" (click)="forget()" expand="block"
-      >Reset Password</ion-button
+
+    <!-- Display Alert -->
+    <div *ngIf="showAlertForget">
+      <ion-text color="primary"
+        >An email with instructions on how to reset your password has been Sent,
+        if you <b>do not</b> receive any email, kindly check the email entered
+        or your spam email folder.</ion-text
+      >
+    </div>
+
+    <!-- Reset password button -->
+    <ion-button
+      class="login-button"
+      (click)="forget()"
+      expand="block"
+      [disabled]="isLoading"
     >
+      Reset Password
+    </ion-button>
+
+    <!-- Button to Login page -->
+    <div class="center-text">
+      <p class="signup-text">
+        Already have an account? &nbsp;<a
+          class="forget-text"
+          (click)="change('signin')"
+          ><b>Login Here</b></a
+        >
+      </p>
+    </div>
   </div>
 </ion-content>

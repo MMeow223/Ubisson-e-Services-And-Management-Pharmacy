@@ -16,3 +16,65 @@
   // font-size: 1.2em;
   font-weight: bold;
 }
+
+// NEW -----
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  font-size: 24px; /* Adjust the size as needed */
+  margin-right: 10px; /* Adjust the margin as needed */
+}
+
+.text-input {
+  flex: 1; /* Allow the input to take up the remaining space */
+  color: #808080;
+}
+
+.img-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 24%; /* Adjust the padding as needed */
+}
+
+.center-image {
+  width: 30%; /* Adjust the width of the image as needed */
+  max-width: 200px; /* Set a maximum width for responsiveness */
+}
+
+.img-container-small {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10%; /* Adjust the padding as needed */
+}
+
+.center-image-small {
+  width: 30%; /* Adjust the width of the image as needed */
+  max-width: 200px; /* Set a maximum width for responsiveness */
+}
+
+.welcome-text {
+  // margin-top: 4px; /* Add spacing between the image and text */
+  font-size: 18px; /* Adjust the font size as needed */
+  color: #808080;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.forget-text {
+  color: black;
+  text-decoration: none;
+}
+
+.grey-text {
+  color: #808080;
+}
