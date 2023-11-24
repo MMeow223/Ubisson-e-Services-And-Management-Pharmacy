@@ -11,8 +11,9 @@ export class AuthGuard {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (localStorage.getItem("token") != null) {
-      authorisedFetch('v1/pharmacist/user', 'GET').then((res) => {
-        if (res?.status !== 200) {
+      authorisedFetch('v1/pharmacist/user', 'GET').then(async (res) => {
+        if (!(res?.status === 200 || res?.status === 429)) {
+          await authorisedFetch('v1/pharmacist/logout', 'POST');
           localStorage.removeItem('token');
           this.router.navigate(['/page-login'], { replaceUrl: true });
         }
