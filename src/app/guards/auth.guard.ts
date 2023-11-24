@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { authorisedFetch } from '../helper/apiHelper';
 
 @Injectable({
   providedIn: 'root'
@@ -10,9 +11,15 @@ export class AuthGuard {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     if (localStorage.getItem("token") != null) {
-      return true;
+      authorisedFetch('v1/pharmacist/user', 'GET').then((res) => {
+        if (res?.status !== 200) {
+          localStorage.removeItem('token');
+          this.router.navigate(['/page-login'], { replaceUrl: true });
+        }
+      });
+      return true; 
     } else {
-      this.router.navigate(['/page-login']);
+      this.router.navigate(['/page-login'], { replaceUrl: true });
       return false; 
     }
   }

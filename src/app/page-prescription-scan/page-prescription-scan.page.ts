@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { authorisedFetch } from '../helper/apiHelper';
 
 @Component({
   selector: 'app-page-prescription-scan',
@@ -63,7 +64,8 @@ export class PagePrescriptionScanPage implements OnDestroy {
     BarcodeScanner.stopScan();
   };
 
-  logout() {
+  async logout() {
+    await authorisedFetch('v1/patient/logout', 'POST');
     localStorage.removeItem('token');
     this.navCtrl.navigateRoot(`/page-login`);
   }

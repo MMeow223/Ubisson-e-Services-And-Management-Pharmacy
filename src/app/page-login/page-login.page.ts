@@ -7,7 +7,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { IonicModule, NavController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import {
   forgotPasswordHelper,
   loginHelper
@@ -78,9 +78,9 @@ export class PageLoginPage implements OnInit {
   showAlertForget: boolean = false;
   rotationTimeout: any;
 
-  constructor(private fb: FormBuilder, public navCtrl: NavController, private router: Router) {
+  constructor(private fb: FormBuilder, private router: Router) {
     if (localStorage.getItem('token') != null) {
-      this.navCtrl.navigateForward(`/home`);
+      this.router.navigate(['/'], {replaceUrl: true}); //default animation
     }
     this.loginFormData = this.fb.group({
       organizationId: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
@@ -119,7 +119,7 @@ export class PageLoginPage implements OnInit {
         // this.navCtrl.navigateRoot(`/`);
         // this.isLoading = false;
         this.reset();
-        this.router.navigate(['/']); //default animation
+        this.router.navigate(['/'], {replaceUrl: true}); //default animation
         
       } else {
         this.reset();

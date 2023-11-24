@@ -29,7 +29,7 @@
   <!-- Login Section -->
   <div class="container" *ngIf="screen === 'signin'">
     <!-- Login Form -->
-    <form [formGroup]="loginFormData">
+    <form [formGroup]="loginFormData" (ngSubmit)="login()">
       <div class="input-container">
         <ion-input
           class="text-input"
@@ -85,7 +85,7 @@
       <!-- Login Button -->
       <ion-button
         class="login-button"
-        (click)="login()"
+        type="submit"
         expand="block"
         [disabled]="isLoading"
       >
@@ -116,7 +116,7 @@
     </p>
 
     <!-- Forget Password Form -->
-    <form [formGroup]="forgetFormData">
+    <form [formGroup]="forgetFormData" (ngSubmit)="forget()">
       <!-- Email -->
       <div class="ion-item">
         <ion-input
@@ -141,7 +141,7 @@
     <!-- Reset password button -->
     <ion-button
       class="login-button"
-      (click)="forget()"
+      type="submit"
       expand="block"
       [disabled]="isLoading"
     >
