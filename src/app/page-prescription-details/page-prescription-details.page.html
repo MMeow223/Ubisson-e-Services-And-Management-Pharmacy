@@ -1,16 +1,14 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-back-button
+      defaultHref="/page-prescription-scan"
+      slot="start"
+    ></ion-back-button>
     <ion-title>Scan Result</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Scan Result</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
   <div class="container">
     <p *ngIf="prescription_id != undefined"><strong>Prescription ID:</strong> {{ prescription_id }}</p>
     <p *ngIf="prescription_id != undefined"><strong>Prescription Status:</strong> {{ claimed ? "Claimed": "Unclaimed" }}</p>

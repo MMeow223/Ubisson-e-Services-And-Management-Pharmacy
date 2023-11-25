@@ -20,7 +20,7 @@ export class PagePrescriptionScanPage implements OnDestroy {
   }
 
   ngOnInit() {
-    this.startScan();
+    
   }
 
   startScan = async () => {
@@ -30,7 +30,7 @@ export class PagePrescriptionScanPage implements OnDestroy {
 
     // make background of WebView transparent
     // note: if you are using ionic this might not be enough, check below
-    document.querySelector('body')!.classList.add('scanner-active');
+    document.querySelector('ion-content')!.classList.add('scanner-active');
     this.scanActive = true;
     BarcodeScanner.hideBackground();
 
@@ -59,7 +59,7 @@ export class PagePrescriptionScanPage implements OnDestroy {
 
   stopScan = () => {
     BarcodeScanner.showBackground();
-    document.querySelector('body')!.classList.remove('scanner-active');
+    document.querySelector('ion-content')!.classList.remove('scanner-active');
     this.scanActive = false;
     BarcodeScanner.stopScan();
   };
