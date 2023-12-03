@@ -11,13 +11,19 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 })
 export class AppComponent {
   public environmentInjector = inject(EnvironmentInjector);
+  private setClass = false;
 
   constructor(private elementRef: ElementRef) {
     // NEW - Need to build and test
     StatusBar.setOverlaysWebView({ overlay: true });
     StatusBar.setStyle({ style: Style.Light });
     //if keyboard is open, add padding to the bottom of the app
-    window.addEventListener('keyboardDidShow', () => {
+    window.addEventListener('keyboardDidShow', (info) => {
+      if (!this.setClass) {
+        let stylesheet = document.styleSheets[0];
+        stylesheet.insertRule(`.keyboard-open { margin-bottom: ${(info as any).keyboardHeight}px !important; }`, 0);
+        this.setClass = true;
+      }
       this.elementRef.nativeElement.querySelectorAll('#ion-app')[0].classList.add('keyboard-open');
       this.elementRef.nativeElement.querySelectorAll(':focus')[0].scrollIntoView({ behavior: 'smooth', block: 'center' });
     });

@@ -22,7 +22,7 @@
     [medication_name]="medication.name"
     [disp]="medication.disp"
     [sig]="medication.sig"
-    [image]="'https://www.helpguide.org/wp-content/uploads/2023/02/Anti-Anxiety-Medication-1200x800.jpeg'"
+    [image]="medication.image"
   ></app-card-medication>
 
   <ion-button *ngIf="claimed == false" class="login-button" expand="block" (click)="uploadEvidence()" [disabled]="buttonDisabled">
